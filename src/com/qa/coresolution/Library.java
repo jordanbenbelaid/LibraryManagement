@@ -2,13 +2,10 @@ package com.qa.coresolution;
 
 import java.util.ArrayList;
 
-import java.util.ArrayList;
-
 public class Library {
 
     private ArrayList<LibraryItem> items = new ArrayList<>();
 
-    // Add item with unique ID check
     public void addItem(LibraryItem item) {
         for (LibraryItem existingItem : items) {
             if (existingItem.getId() == item.getId()) {
@@ -20,7 +17,6 @@ public class Library {
         System.out.println("Item added successfully: " + item);
     }
 
-    // List all items
     public void listItems() {
         for (LibraryItem item : items) {
             String status = item.isBorrowed() ? "Borrowed" : "Available";
@@ -28,33 +24,42 @@ public class Library {
         }
     }
 
-    // --- Delegated borrowing & returning ---
-    public void borrowItem(int itemId, User user) {
-        LibraryItem item = findItemById(itemId);
-        if (item != null) {
-            user.borrowItem(item); // Delegated
-        } else {
-            System.out.println("Item not found.");
-        }
-    }
-
-    public void returnItem(int itemId, User user) {
-        LibraryItem item = findItemById(itemId);
-        if (item != null) {
-            user.returnItem(item); // Delegated
-        } else {
-            System.out.println("Item not found.");
-        }
-    }
-
-    // Helper: find item by ID
     private LibraryItem findItemById(int id) {
         for (LibraryItem item : items) {
             if (item.getId() == id) return item;
         }
         return null;
     }
+
+    // Borrow with try/catch
+    public void borrowItem(int id, User user) {
+        LibraryItem item = findItemById(id);
+        if (item == null) {
+            System.out.println("Item not found.");
+            return;
+        }
+        try {
+            user.borrowItem(item);
+        } catch (BorrowLimitExceededException | ItemAlreadyBorrowedException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    // Return with try/catch
+    public void returnItem(int id, User user) {
+        LibraryItem item = findItemById(id);
+        if (item == null) {
+            System.out.println("Item not found.");
+            return;
+        }
+        try {
+            user.returnItem(item);
+        } catch (ItemNotBorrowedException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }
+
 
 
 

@@ -17,32 +17,27 @@ public class User {
     }
 
     public String getName() { return name; }
-    public ArrayList<LibraryItem> getBorrowedItems() { return borrowedItems; }
 
-    public boolean borrowItem(LibraryItem item) {
+    // Borrow item with exception handling
+    public void borrowItem(LibraryItem item) throws BorrowLimitExceededException, ItemAlreadyBorrowedException {
         if (borrowedItems.size() >= borrowLimit) {
-            System.out.println(name + " has reached the borrow limit of " + borrowLimit + " items.");
-            return false;
+            throw new BorrowLimitExceededException(name + " has reached the borrow limit of " + borrowLimit);
         }
-        if (!item.borrowItem()) {
-            System.out.println(item.getTitle() + " is already borrowed.");
-            return false;
-        }
+        item.borrowItem(); // May throw ItemAlreadyBorrowedException
         borrowedItems.add(item);
         System.out.println(name + " successfully borrowed: " + item);
-        return true;
     }
 
-    public boolean returnItem(LibraryItem item) {
+    // Return item with exception handling
+    public void returnItem(LibraryItem item) throws ItemNotBorrowedException {
         if (!borrowedItems.contains(item)) {
-            System.out.println(name + " did not borrow " + item.getTitle() + ".");
-            return false;
+            throw new ItemNotBorrowedException(name + " did not borrow " + item.getTitle());
         }
-        item.returnItem();
+        item.returnItem(); // May throw ItemNotBorrowedException
         borrowedItems.remove(item);
         System.out.println(name + " successfully returned: " + item);
-        return true;
     }
 }
+
 
 

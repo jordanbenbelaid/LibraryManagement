@@ -15,23 +15,29 @@ public abstract class LibraryItem {
     public String getTitle() { return title; }
     public boolean isBorrowed() { return isBorrowed; }
 
-    // Borrow logic is inside LibraryItem
-    public boolean borrowItem() {
-        if (isBorrowed) return false;
+    // Borrowing now throws exception
+    public void borrowItem() throws ItemAlreadyBorrowedException {
+        if (isBorrowed) {
+            throw new ItemAlreadyBorrowedException(getTitle() + " is already borrowed.");
+        }
         isBorrowed = true;
-        return true;
     }
 
-    public boolean returnItem() {
-        if (!isBorrowed) return false;
+    // Returning now throws exception
+    public void returnItem() throws ItemNotBorrowedException {
+        if (!isBorrowed) {
+            throw new ItemNotBorrowedException(getTitle() + " was not borrowed.");
+        }
         isBorrowed = false;
-        return true;
     }
 
     public abstract String getItemType();
     public abstract String getDescription();
 
     @Override
-    public String toString() { return getDescription(); }
+    public String toString() {
+        return getDescription();
+    }
 }
+
 
