@@ -21,7 +21,7 @@ public class Library {
     public void listItems() {
         for (LibraryItem item : items) {
             String status = item.isBorrowed() ? "Borrowed" : "Available";
-            System.out.println(item.getDescription() + " - " + status);
+            System.out.println(item + " - " + status); // toString() is called automatically
         }
     }
 

@@ -16,7 +16,11 @@ public class Magazine extends LibraryItem {
 
     @Override
     public String getDescription() {
-        return getItemType() + ": " + getTitle() +
-                " (Issue " + issueNumber + ")";
+        return this.toString(); // Optional: delegate to toString
+    }
+
+    @Override
+    public String toString() {
+        return getItemType() + ": " + getTitle() + " (Issue " + issueNumber + ")";
     }
 }

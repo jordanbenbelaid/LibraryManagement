@@ -42,5 +42,7 @@ public abstract class LibraryItem {
 
     public abstract String getItemType();
 
+    // Optional: keep getDescription for backward compatibility
     public abstract String getDescription();
 }
+

@@ -18,7 +18,12 @@ public class Book extends LibraryItem {
 
     @Override
     public String getDescription() {
-        return getItemType() + ": " + getTitle() +
-                " by " + author + " (" + pages + " pages)";
+        return this.toString(); // Optional: delegate to toString
+    }
+
+    @Override
+    public String toString() {
+        return getItemType() + ": " + getTitle() + " by " + author + " (" + pages + " pages)";
     }
 }
+
