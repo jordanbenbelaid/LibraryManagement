@@ -1,7 +1,6 @@
 package com.qa.coresolution;
 
 public abstract class LibraryItem {
-
     private int id;
     private String title;
     private boolean isBorrowed;
@@ -12,37 +11,27 @@ public abstract class LibraryItem {
         this.isBorrowed = false;
     }
 
-    public int getId() {
-        return id;
-    }
+    public int getId() { return id; }
+    public String getTitle() { return title; }
+    public boolean isBorrowed() { return isBorrowed; }
 
-    public String getTitle() {
-        return title;
-    }
-
-    public boolean isBorrowed() {
-        return isBorrowed;
-    }
-
+    // Borrow logic is inside LibraryItem
     public boolean borrowItem() {
-        if (isBorrowed) {
-            return false;
-        }
+        if (isBorrowed) return false;
         isBorrowed = true;
         return true;
     }
 
     public boolean returnItem() {
-        if (!isBorrowed) {
-            return false;
-        }
+        if (!isBorrowed) return false;
         isBorrowed = false;
         return true;
     }
 
     public abstract String getItemType();
-
-    // Optional: keep getDescription for backward compatibility
     public abstract String getDescription();
+
+    @Override
+    public String toString() { return getDescription(); }
 }
 

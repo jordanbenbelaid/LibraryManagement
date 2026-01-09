@@ -2,10 +2,13 @@ package com.qa.coresolution;
 
 import java.util.ArrayList;
 
+import java.util.ArrayList;
+
 public class Library {
 
     private ArrayList<LibraryItem> items = new ArrayList<>();
 
+    // Add item with unique ID check
     public void addItem(LibraryItem item) {
         for (LibraryItem existingItem : items) {
             if (existingItem.getId() == item.getId()) {
@@ -17,6 +20,7 @@ public class Library {
         System.out.println("Item added successfully: " + item);
     }
 
+    // List all items
     public void listItems() {
         for (LibraryItem item : items) {
             String status = item.isBorrowed() ? "Borrowed" : "Available";
@@ -24,28 +28,34 @@ public class Library {
         }
     }
 
-    // Borrow an item for a specific user
-    public void borrowItem(int id, User user) {
-        for (LibraryItem item : items) {
-            if (item.getId() == id) {
-                user.borrowItem(item); // Delegates logic to User class
-                return;
-            }
+    // --- Delegated borrowing & returning ---
+    public void borrowItem(int itemId, User user) {
+        LibraryItem item = findItemById(itemId);
+        if (item != null) {
+            user.borrowItem(item); // Delegated
+        } else {
+            System.out.println("Item not found.");
         }
-        System.out.println("Item not found.");
     }
 
-    // Return an item for a specific user
-    public void returnItem(int id, User user) {
-        for (LibraryItem item : items) {
-            if (item.getId() == id) {
-                user.returnItem(item);
-                return;
-            }
+    public void returnItem(int itemId, User user) {
+        LibraryItem item = findItemById(itemId);
+        if (item != null) {
+            user.returnItem(item); // Delegated
+        } else {
+            System.out.println("Item not found.");
         }
-        System.out.println("Item not found.");
+    }
+
+    // Helper: find item by ID
+    private LibraryItem findItemById(int id) {
+        for (LibraryItem item : items) {
+            if (item.getId() == id) return item;
+        }
+        return null;
     }
 }
+
 
 
 
