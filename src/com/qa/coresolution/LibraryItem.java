@@ -24,14 +24,20 @@ public abstract class LibraryItem {
         return isBorrowed;
     }
 
-    public void borrowItem() {
-        if (!isBorrowed) {
-            isBorrowed = true;
+    public boolean borrowItem() {
+        if (isBorrowed) {
+            return false;
         }
+        isBorrowed = true;
+        return true;
     }
 
-    public void returnItem() {
+    public boolean returnItem() {
+        if (!isBorrowed) {
+            return false;
+        }
         isBorrowed = false;
+        return true;
     }
 
     public abstract String getItemType();

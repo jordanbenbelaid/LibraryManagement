@@ -20,7 +20,11 @@ public class Library {
     public void borrowItem(int id) {
         for (LibraryItem item : items) {
             if (item.getId() == id) {
-                item.borrowItem();
+                if (item.borrowItem()) {
+                    System.out.println("Item borrowed successfully.");
+                } else {
+                    System.out.println("Item is already borrowed.");
+                }
                 return;
             }
         }
@@ -30,7 +34,11 @@ public class Library {
     public void returnItem(int id) {
         for (LibraryItem item : items) {
             if (item.getId() == id) {
-                item.returnItem();
+                if (item.returnItem()) {
+                    System.out.println("Item returned successfully.");
+                } else {
+                    System.out.println("Item was not borrowed.");
+                }
                 return;
             }
         }
