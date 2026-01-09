@@ -1,0 +1,98 @@
+Exercise: Simple Library Management System
+
+1. Abstract Base Class
+
+Create an abstract class called LibraryItem with:
+id (int)
+title (String)
+isBorrowed (boolean)
+
+Methods:
+borrowItem()
+returnItem()
+getItemType() → abstract
+getDescription() → abstract
+
+2. Subclasses
+
+Create two subclasses:
+Book
+author (String)
+pages (int)
+
+Magazine
+issueNumber (int)
+
+Each subclass must:
+Implement getItemType()
+Implement getDescription()
+
+3. Library Class
+
+Create a Library class that:
+Stores a list of LibraryItem
+
+Can:
+Add items
+List all items
+Borrow an item by ID
+Return an item by ID
+
+4. Main Program
+
+In Main:
+Create a library
+Add several books and magazines
+Borrow and return items
+Print results to the console
+
+Step-by-Step Tasks (Student Path):
+Design the LibraryItem abstract class
+Implement encapsulation using getters/setters
+Create Book and Magazine subclasses
+Use method overriding
+Create a Library class using ArrayList<LibraryItem>
+Demonstrate polymorphism in action
+Test everything in main()
+
+EXTENSION TASKS:
+1. Borrowing Rules
+Prevent borrowing an item if it’s already borrowed
+Print a clear message when borrowing fails
+Prevent returning an item that isn’t borrowed
+
+2. Unique ID Validation
+Prevent adding two items with the same ID
+Print an error if a duplicate ID is found
+
+3. Override toString()
+Override toString() in each subclass
+Use it instead of getDescription()
+
+4. Search Features
+Add methods to:
+Search by title (partial match)
+List all available items only
+List borrowed items only
+
+5. User Class       -7
+Create a User class:
+id
+name
+List of borrowed items
+Limit of borrowed items (e.g. max 3)
+
+Update borrowing logic to:
+Track who borrowed what
+Enforce borrow limits
+
+6. Move Logic into Objects     -8
+Move borrow/return logic into LibraryItem
+Let Library coordinate instead of control
+
+7. Exceptions       -12
+Throw exceptions for:
+Item not found
+Borrowing an already borrowed item
+
+Catch and handle them in Main
